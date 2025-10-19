@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2081695F-243
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Web", "ExpenseTracker.Web\ExpenseTracker.Web.csproj", "{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,11 +16,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78} = {2081695F-2430-4B3E-8C79-1548861B007C}
+		{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC} = {2081695F-2430-4B3E-8C79-1548861B007C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB5F263-0A1E-4AF5-9CDA-6AAA087766FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

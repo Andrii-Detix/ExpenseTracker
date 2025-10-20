@@ -2,8 +2,8 @@ services:
   expense-tracker-api:
     container_name: expense-tracker-api
     build:
-      context: ExpenseTracker.Web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ExpenseTracker.Web/Dockerfile
     ports:
       - '8080:8080'
     restart: unless-stopped

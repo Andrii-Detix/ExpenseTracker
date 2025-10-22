@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using ExpenseTracker.Web.HealthCheck;
+﻿using ExpenseTracker.Web.HealthCheck;
 
 namespace ExpenseTracker.Web.Endpoints;
 
@@ -19,7 +18,7 @@ public static class HealthCheckEndpoints
             object result = new
             {
                 Status = nameof(HealthStatus.Healthy),
-                Time = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
+                Time = DateTime.UtcNow
             };
             
             return Results.Ok(result);

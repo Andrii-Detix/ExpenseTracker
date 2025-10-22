@@ -49,7 +49,34 @@ To check if the service is running correctly, send a simple **HTTP GET** request
 
 | HTTP Method | URL                      | Description                              |
 |-------------|--------------------------|------------------------------------------|
-| GET         | `/healthcheck`           | Returns service status and current UTC time |
+| GET         | `/healthcheck`           | Return service status and current UTC time |
+
+### User
+
+| HTTP Method | URL                      | Description                              |
+|-------------|--------------------------|------------------------------------------|
+| POST        | `/users`                 | Create a new user with the specified `name` |
+| DELETE      | `/users/{id}`            | Delete a user by the unique id           |
+| GET         | `/users/{id}`            | Return a user by the unique id           |
+| GET         | `/users`                 | Return a list of users                   |
+
+### Category
+
+| HTTP Method | URL                      | Description                              |
+|-------------|--------------------------|------------------------------------------|
+| POST        | `/categories`            | Create a new category with the specified `name` |
+| DELETE      | `/categories/{id}`       | Delete a category by the unique id       |
+| GET         | `/categories/{id}`       | Return a category by the unique id       |
+| GET         | `/categories`            | Return a list of categories              |
+
+### Record
+
+| HTTP Method | URL                      | Description                              |
+|-------------|--------------------------|------------------------------------------|
+| POST        | `/records`               | Create a new record with the specified `userId`, `categoryId` and `amount` |
+| DELETE      | `/records/{id}`          | Delete a record by the unique id       |
+| GET         | `/records/{id}`          | Return a record by the unique id       |
+| GET         | `/records?UserId={id}&CategoryId={id}` | Return a list of records filtered by `UserId` and `CategoryId`. At least one parameter must be provided |
 
 <span id="author"></span>
 ## Author

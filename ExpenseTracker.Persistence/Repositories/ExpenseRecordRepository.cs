@@ -15,7 +15,19 @@ public class ExpenseRecordRepository(AppDbContext dbContext) : IExpenseRecordRep
 
     public async Task<IEnumerable<ExpenseRecord>> GetAllByFilter(ExpenseRecordFilterParams filterParams, CancellationToken ct)
     {
-        return await dbContext.ExpenseRecords.ToArrayAsync(ct);
+        IQueryable<ExpenseRecord> query = dbContext.ExpenseRecords;
+
+        if (filterParams.UserId is not null)
+        {
+            query = query.Where(x => x.UserId == filterParams.UserId);
+        }
+
+        if (filterParams.CategoryId is not null)
+        {
+            query = query.Where(x => x.CategoryId == filterParams.CategoryId);
+        }
+        
+        return await query.ToArrayAsync(ct);
     }
 
     public async Task Add(ExpenseRecord expenseRecord, CancellationToken ct)

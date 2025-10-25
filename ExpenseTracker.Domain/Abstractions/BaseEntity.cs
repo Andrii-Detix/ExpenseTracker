@@ -1,6 +1,13 @@
 ﻿namespace ExpenseTracker.Domain.Abstractions;
 
-public abstract class BaseEntity(Guid id)
+public abstract class BaseEntity
 {
-    public Guid Id { get; } = id;
+    protected BaseEntity(Guid id)
+    {
+        Id = id;
+    }
+    
+    protected BaseEntity() { }
+
+    public Guid Id { get; }
 }

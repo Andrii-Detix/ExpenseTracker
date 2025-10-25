@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
+using ExpenseTracker.Application.Abstractions.Persistence;
 using ExpenseTracker.Application.Categories.Abstractions;
 using ExpenseTracker.Application.Categories.Errors;
 using ExpenseTracker.Domain.Categories;
@@ -6,7 +7,7 @@ using Shared.Results;
 
 namespace ExpenseTracker.Application.Categories.Commands.DeleteCategoryByIdCommands;
 
-public sealed class DeleteCategoryByIdCommandHandler(ICategoryRepository categoryRepository)
+public sealed class DeleteCategoryByIdCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     : ICommandHandler<DeleteCategoryByIdCommand, Result>
 {
     public async Task<Result> Handle(DeleteCategoryByIdCommand command, CancellationToken ct)
@@ -18,6 +19,7 @@ public sealed class DeleteCategoryByIdCommandHandler(ICategoryRepository categor
         }
         
         await categoryRepository.Delete(command.Id, ct);
+        await unitOfWork.SaveChangesAsync(ct);
         
         return Result.Success();
     }

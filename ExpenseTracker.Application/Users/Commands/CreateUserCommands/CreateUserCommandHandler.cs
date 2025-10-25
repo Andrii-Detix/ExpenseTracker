@@ -1,11 +1,12 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
+using ExpenseTracker.Application.Abstractions.Persistence;
 using ExpenseTracker.Application.Users.Abstractions;
 using ExpenseTracker.Domain.Users;
 using Shared.Results;
 
 namespace ExpenseTracker.Application.Users.Commands.CreateUserCommands;
 
-public sealed class CreateUserCommandHandler(IUserRepository userRepository)
+public sealed class CreateUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
     : ICommandHandler<CreateUserCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateUserCommand command, CancellationToken ct)
@@ -19,6 +20,7 @@ public sealed class CreateUserCommandHandler(IUserRepository userRepository)
         User user = userResult.Value!;
         
         await userRepository.Add(user, ct);
+        await unitOfWork.SaveChangesAsync(ct);
 
         return user.Id;
     }

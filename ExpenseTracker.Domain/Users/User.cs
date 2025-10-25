@@ -12,7 +12,9 @@ public class User : BaseEntity
         Name = name;
     }
     
-    public UserName Name { get; }
+    private User() { }
+    
+    public UserName Name { get; } = null!;
 
     public static Result<User> Create(Guid id, string name)
     {

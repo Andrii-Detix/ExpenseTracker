@@ -1,18 +1,31 @@
-﻿using ExpenseTracker.Application.Categories.Abstractions;
+﻿using ExpenseTracker.Application.Abstractions.Persistence;
+using ExpenseTracker.Application.Categories.Abstractions;
 using ExpenseTracker.Application.ExpenseRecords.Abstractions;
 using ExpenseTracker.Application.Users.Abstractions;
+using ExpenseTracker.Persistence.Context;
 using ExpenseTracker.Persistence.Repositories;
+using ExpenseTracker.Persistence.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExpenseTracker.Persistence;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddPersistence(this IServiceCollection services)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<IUserRepository, InMemoryUserRepository>();
-        services.AddSingleton<ICategoryRepository, InMemoryCategoryRepository>();
-        services.AddSingleton<IExpenseRecordRepository, InMemoryExpenseRecordRepository>();
+        string? connectionString = configuration.GetConnectionString("Database");
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseNpgsql(connectionString);
+        });
+        
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IExpenseRecordRepository, ExpenseRecordRepository>();
         
         return services;
     }

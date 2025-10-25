@@ -15,5 +15,5 @@ COPY . .
 RUN dotnet publish ExpenseTracker.Web/ExpenseTracker.Web.csproj -c $BUILD_CONFIGURATION -o /publish /p:UseAppHost=false
 
 FROM base AS final
-COPY --from=build /publish ./publish
-ENTRYPOINT ["dotnet", "publish/ExpenseTracker.Web.dll"]
+COPY --from=build /publish .
+ENTRYPOINT ["dotnet", "ExpenseTracker.Web.dll"]

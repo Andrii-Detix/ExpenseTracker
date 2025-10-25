@@ -14,6 +14,8 @@ var app = builder.Build();
 
 app.ApplyMigrations();
 
+app.UseExceptionHandler();
+
 app.MapUserEndpoints()
     .MapCategoryEndpoints()
     .MapExpenseRecordEndpoints()

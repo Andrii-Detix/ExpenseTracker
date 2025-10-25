@@ -1,4 +1,6 @@
-﻿namespace ExpenseTracker.Web.Extensions;
+﻿using ExpenseTracker.Web.Exceptions.Handlers;
+
+namespace ExpenseTracker.Web.Extensions;
 
 public static class DependencyInjection
 {
@@ -12,6 +14,8 @@ public static class DependencyInjection
                     $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
             };
         });
+
+        services.AddExceptionHandler<GlobalExceptionHandler>();
         
         return services;
     }

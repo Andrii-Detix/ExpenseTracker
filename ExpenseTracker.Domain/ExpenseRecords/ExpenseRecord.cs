@@ -19,11 +19,13 @@ public class ExpenseRecord : BaseEntity
         CreatedAt = createdAt;
         Amount = amount;
     }
+
+    private ExpenseRecord() { }
     
     public Guid UserId { get; }
     public Guid CategoryId { get; }
     public DateTime CreatedAt { get; }
-    public ExpenseAmount Amount { get; }
+    public ExpenseAmount Amount { get; } = null!;
 
     public static Result<ExpenseRecord> Create(
         Guid id,

@@ -11,8 +11,10 @@ public class Category : BaseEntity
     {
         Name = name;
     }
+
+    private Category() { }
     
-    public CategoryName Name { get; }
+    public CategoryName Name { get; } = null!;
 
     public static Result<Category> Create(Guid id, string name)
     {

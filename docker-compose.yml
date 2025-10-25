@@ -4,6 +4,23 @@ services:
     build:
       context: .
       dockerfile: ExpenseTracker.Web/Dockerfile
+    depends_on:
+      - expense-tracker-database
     ports:
       - '8080:8080'
     restart: unless-stopped
+    
+  expense-tracker-database:
+    image: postgres:17.5-bullseye
+    container_name: expense-tracker-database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345678
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  
+volumes:
+  db_data:
+    name: expense-tracker-db-data

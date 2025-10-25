@@ -7,10 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApplication()
-    .AddPersistence()
+    .AddPersistence(builder.Configuration)
     .AddWeb();
 
 var app = builder.Build();
+
+app.ApplyMigrations();
 
 app.MapUserEndpoints()
     .MapCategoryEndpoints()

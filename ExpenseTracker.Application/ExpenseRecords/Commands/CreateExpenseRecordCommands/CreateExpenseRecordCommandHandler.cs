@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
+using ExpenseTracker.Application.Abstractions.Persistence;
 using ExpenseTracker.Application.Categories.Abstractions;
 using ExpenseTracker.Application.Categories.Errors;
 using ExpenseTracker.Application.ExpenseRecords.Abstractions;
@@ -14,7 +15,8 @@ namespace ExpenseTracker.Application.ExpenseRecords.Commands.CreateExpenseRecord
 public sealed class CreateExpenseRecordCommandHandler(
     IExpenseRecordRepository  expenseRecordRepository,
     IUserRepository  userRepository,
-    ICategoryRepository categoryRepository)
+    ICategoryRepository categoryRepository,
+    IUnitOfWork unitOfWork)
     : ICommandHandler<CreateExpenseRecordCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateExpenseRecordCommand command, CancellationToken ct)
@@ -46,6 +48,7 @@ public sealed class CreateExpenseRecordCommandHandler(
         ExpenseRecord expenseRecord = expenseRecordResult.Value!;
         
         await expenseRecordRepository.Add(expenseRecord, ct);
+        await unitOfWork.SaveChangesAsync(ct);
         
         return expenseRecord.Id;
     }

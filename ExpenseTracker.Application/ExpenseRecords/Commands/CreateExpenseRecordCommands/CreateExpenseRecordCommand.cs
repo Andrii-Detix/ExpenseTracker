@@ -6,5 +6,6 @@ namespace ExpenseTracker.Application.ExpenseRecords.Commands.CreateExpenseRecord
 public record CreateExpenseRecordCommand(
     Guid UserId,
     Guid CategoryId,
-    decimal Amount)
+    decimal Amount,
+    Guid? CurrencyId = null)
     : ICommand<Result<Guid>>;

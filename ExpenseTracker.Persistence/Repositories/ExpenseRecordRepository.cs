@@ -44,4 +44,9 @@ public class ExpenseRecordRepository(AppDbContext dbContext) : IExpenseRecordRep
             dbContext.ExpenseRecords.Remove(expenseRecord);
         }
     }
+
+    public async Task<bool> IsAnyByCurrency(Guid currencyId, CancellationToken ct)
+    {
+        return await dbContext.ExpenseRecords.AnyAsync(er => er.CurrencyId == currencyId, ct);
+    }
 }

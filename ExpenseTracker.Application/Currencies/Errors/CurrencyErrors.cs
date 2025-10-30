@@ -9,4 +9,7 @@ public static class CurrencyErrors
     
     public static Error NotFoundById(Guid id) => Error.NotFound(
         "Currency.NotFoundById", $"The currency with id {id} was not found.");
+
+    public static Error IsUsed = Error.Conflict(
+        "Currency.IsUsed", "Currency is used by other entities.");
 }

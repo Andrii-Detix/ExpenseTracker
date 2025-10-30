@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Domain.Categories;
+using ExpenseTracker.Domain.Currencies;
 using ExpenseTracker.Domain.ExpenseRecords;
 using ExpenseTracker.Domain.Users;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,11 @@ public class ExpenseRecordConfiguration : IEntityTypeConfiguration<ExpenseRecord
             .ValueGeneratedNever()
             .HasColumnName("category_id");
         
+        builder.Property(er => er.CurrencyId)
+            .IsRequired()
+            .ValueGeneratedNever()
+            .HasColumnName("currency_id");
+        
         builder.Property(er => er.CreatedAt)
             .IsRequired()
             .HasColumnName("created_at");
@@ -48,5 +54,9 @@ public class ExpenseRecordConfiguration : IEntityTypeConfiguration<ExpenseRecord
         builder.HasOne<Category>()
             .WithMany()
             .HasForeignKey(er => er.CategoryId);
+        
+        builder.HasOne<Currency>()
+            .WithMany()
+            .HasForeignKey(er => er.CurrencyId);
     }
 }

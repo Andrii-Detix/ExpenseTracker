@@ -15,7 +15,7 @@ public class User : BaseEntity
     
     private User() { }
     
-    public Guid DefaultCurrencyId { get; }
+    public Guid DefaultCurrencyId { get; private set; }
     public UserName Name { get; }
 
     public static Result<User> Create(Guid id, Guid defaultCurrencyId, string name)
@@ -27,5 +27,10 @@ public class User : BaseEntity
         }
 
         return new User(id, defaultCurrencyId, nameResult.Value!);
+    }
+
+    public void SetDefaultCurrency(Guid defaultCurrencyId)
+    {
+        DefaultCurrencyId = defaultCurrencyId;
     }
 }

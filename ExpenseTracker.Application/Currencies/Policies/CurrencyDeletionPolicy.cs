@@ -14,10 +14,10 @@ public class CurrencyDeletionPolicy(
 {
     public async Task<Result> CanDelete(Currency currency, CancellationToken ct)
     {
-        Task<bool> isUsedByUsers = userRepository.IsAnyByDefaultCurrency(currency.Id, ct);
-        Task<bool> isUsedByRecords = expenseRecordRepository.IsAnyByCurrency(currency.Id, ct);
+        bool isUsedByUsers = await userRepository.IsAnyByDefaultCurrency(currency.Id, ct);
+        bool isUsedByRecords = await expenseRecordRepository.IsAnyByCurrency(currency.Id, ct);
 
-        if (await isUsedByUsers && await isUsedByRecords)
+        if (isUsedByUsers || isUsedByRecords)
         {
             return CurrencyErrors.IsUsed;
         }

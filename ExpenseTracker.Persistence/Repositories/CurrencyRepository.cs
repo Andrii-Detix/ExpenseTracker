@@ -35,6 +35,6 @@ public class CurrencyRepository(AppDbContext dbContext) : ICurrencyRepository
 
     public async Task<bool> IsUniqueCode(CurrencyCode code, CancellationToken ct)
     {
-        return await dbContext.Currencies.AnyAsync(c => c.Code == code, ct);
+        return await dbContext.Currencies.AllAsync(c => c.Code != code, ct);
     }
 }

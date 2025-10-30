@@ -27,7 +27,7 @@ public class Currency : BaseEntity
             return codeResult.Error;
         }
         
-        Result<CurrencyName> nameResult = CurrencyName.Create(code);
+        Result<CurrencyName> nameResult = CurrencyName.Create(name);
         if (nameResult.IsFailure)
         {
             return nameResult.Error;

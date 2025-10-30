@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Domain.Currencies;
+using ExpenseTracker.Domain.Currencies.ValueObjects.Codes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,22 +14,22 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.HasKey(c => c.Id)
             .HasName("pk_currencies");
         
+        builder.HasIndex(c => c.Code)
+            .IsUnique();
+        
         builder.Property(c => c.Id)
             .IsRequired()
             .ValueGeneratedNever()
             .HasColumnName("id");
 
-        builder.OwnsOne(c => c.Code, codeBuilder =>
-        {
-            codeBuilder.HasIndex(cc => cc.Value)
-                .IsUnique();
-            
-            codeBuilder.Property(cc => cc.Value)
-                .IsRequired()
-                .HasMaxLength(3)
-                .IsFixedLength()
-                .HasColumnName("code");
-        });
+        builder.Property(c => c.Code)
+            .HasConversion(
+                cc => cc.Value, 
+                value => CurrencyCode.Create(value).Value!)
+            .IsRequired()
+            .HasMaxLength(3)
+            .IsFixedLength()
+            .HasColumnName("code");
 
         builder.ComplexProperty(c => c.Name, nameBuilder =>
         {

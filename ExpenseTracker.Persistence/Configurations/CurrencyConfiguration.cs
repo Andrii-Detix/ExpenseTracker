@@ -13,17 +13,17 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.HasKey(c => c.Id)
             .HasName("pk_currencies");
         
-        builder.HasIndex(c => c.Code.Value)
-            .IsUnique();
-        
         builder.Property(c => c.Id)
             .IsRequired()
             .ValueGeneratedNever()
             .HasColumnName("id");
 
-        builder.ComplexProperty(c => c.Code, codeBuilder =>
+        builder.OwnsOne(c => c.Code, codeBuilder =>
         {
-            codeBuilder.Property(cc => cc)
+            codeBuilder.HasIndex(cc => cc.Value)
+                .IsUnique();
+            
+            codeBuilder.Property(cc => cc.Value)
                 .IsRequired()
                 .HasMaxLength(3)
                 .IsFixedLength()

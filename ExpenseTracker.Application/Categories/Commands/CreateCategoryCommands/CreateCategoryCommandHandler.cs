@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
 using ExpenseTracker.Application.Abstractions.Persistence;
 using ExpenseTracker.Application.Categories.Abstractions;
+using ExpenseTracker.Application.Categories.Errors;
 using ExpenseTracker.Domain.Categories;
 using Shared.Results;
 
@@ -18,6 +19,11 @@ public sealed class CreateCategoryCommandHandler(ICategoryRepository categoryRep
         }
         
         Category category = categoryResult.Value!;
+
+        if (!await categoryRepository.IsUniqueName(category.Name, ct))
+        {
+            return CategoryErrors.AlreadyExistsByName(category.Name.Value);
+        }
         
         await categoryRepository.Add(category, ct);
         await unitOfWork.SaveChangesAsync(ct);

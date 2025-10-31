@@ -7,6 +7,7 @@ The application is written in **C#** using the **ASP.NET Core** platform.
 ## Content Table
 - [Installation and Run](#installation)
 - [Endpoints](#endpoints)
+- [Individual Task](#individual-task)
 - [Author](#author)
 
 <span id="installation"></span>
@@ -55,10 +56,20 @@ To check if the service is running correctly, send a simple **HTTP GET** request
 
 | HTTP Method | URL                      | Description                              |
 |-------------|--------------------------|------------------------------------------|
-| POST        | `/users`                 | Create a new user with the specified `name` |
+| POST        | `/users`                 | Create a new user with the specified `name` and `defaultCurrencyId` |
+| PUT         | `/users/{id}/currency`   | Set specified default currency for the user |
 | DELETE      | `/users/{id}`            | Delete a user by the unique id           |
 | GET         | `/users/{id}`            | Return a user by the unique id           |
 | GET         | `/users`                 | Return a list of users                   |
+
+### Currency
+
+| HTTP Method | URL                      | Description                              |
+|-------------|--------------------------|------------------------------------------|
+| POST        | `/currencies`            | Create a new currency with the specified `code` and `name` |
+| DELETE      | `/currencies/{id}`       | Delete a currency by the unique id       |
+| GET         | `/currencies/{id}`       | Return a currency by the unique id       |
+| GET         | `/currencies`            | Return a list of currencies              |
 
 ### Category
 
@@ -73,10 +84,23 @@ To check if the service is running correctly, send a simple **HTTP GET** request
 
 | HTTP Method | URL                      | Description                              |
 |-------------|--------------------------|------------------------------------------|
-| POST        | `/records`               | Create a new record with the specified `userId`, `categoryId` and `amount` |
+| POST        | `/records`               | Create a new record with the specified `userId`, `categoryId`, `currencyId` and `amount` |
 | DELETE      | `/records/{id}`          | Delete a record by the unique id       |
 | GET         | `/records/{id}`          | Return a record by the unique id       |
 | GET         | `/records?UserId={id}&CategoryId={id}` | Return a list of records filtered by `UserId` and `CategoryId`. At least one parameter must be provided |
+
+<span id="individual-task"></span>
+## Individual Task
+### Determining the Variant Number  
+University group: IM-31.  
+Number of variants: 3.  
+Variant number: 31 mod 3 = 1.  
+
+### Description of Variant 1
+- Currency support. It is required to create a currency entity.  
+- Each user has a default currency.  
+- When creating an expense record, it is possible to specify the associated currency.  
+- If no currency is provided for the expense record, the user's default currency will be used.
 
 <span id="author"></span>
 ## Author

@@ -6,17 +6,19 @@ namespace ExpenseTracker.Domain.Users;
 
 public class User : BaseEntity
 {
-    private User(Guid id, UserName name) 
+    private User(Guid id, Guid defaultCurrencyId, UserName name) 
         : base(id)
     {
+        DefaultCurrencyId = defaultCurrencyId;
         Name = name;
     }
     
     private User() { }
     
-    public UserName Name { get; } = null!;
+    public Guid DefaultCurrencyId { get; private set; }
+    public UserName Name { get; }
 
-    public static Result<User> Create(Guid id, string name)
+    public static Result<User> Create(Guid id, Guid defaultCurrencyId, string name)
     {
         Result<UserName> nameResult = UserName.Create(name);
         if (nameResult.IsFailure)
@@ -24,6 +26,11 @@ public class User : BaseEntity
             return nameResult.Error;
         }
 
-        return new User(id, nameResult.Value!);
+        return new User(id, defaultCurrencyId, nameResult.Value!);
+    }
+
+    public void SetDefaultCurrency(Guid defaultCurrencyId)
+    {
+        DefaultCurrencyId = defaultCurrencyId;
     }
 }

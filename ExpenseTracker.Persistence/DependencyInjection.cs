@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Application.Abstractions.Persistence;
 using ExpenseTracker.Application.Categories.Abstractions;
+using ExpenseTracker.Application.Currencies.Abstractions;
 using ExpenseTracker.Application.ExpenseRecords.Abstractions;
 using ExpenseTracker.Application.Users.Abstractions;
 using ExpenseTracker.Persistence.Context;
@@ -24,6 +25,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IExpenseRecordRepository, ExpenseRecordRepository>();
         

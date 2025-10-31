@@ -31,4 +31,9 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
             dbContext.Users.Remove(user);
         }
     }
+
+    public Task<bool> IsAnyByDefaultCurrency(Guid defaultCurrencyId, CancellationToken ct)
+    {
+        return dbContext.Users.AnyAsync(u => u.DefaultCurrencyId == defaultCurrencyId, ct);
+    }
 }

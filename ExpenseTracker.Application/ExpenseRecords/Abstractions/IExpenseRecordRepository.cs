@@ -9,4 +9,5 @@ public interface IExpenseRecordRepository
     public Task<IEnumerable<ExpenseRecord>> GetAllByFilter(ExpenseRecordFilterParams filterParams, CancellationToken ct);
     public Task Add(ExpenseRecord expenseRecord, CancellationToken ct);
     public Task Delete(Guid id, CancellationToken ct);
+    public Task<bool> IsAnyByCurrency(Guid currencyId, CancellationToken ct);
 }

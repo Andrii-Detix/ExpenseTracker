@@ -1,10 +1,13 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
 using ExpenseTracker.Application.Users.Commands.CreateUserCommands;
 using ExpenseTracker.Application.Users.Commands.DeleteUserByIdCommands;
+using ExpenseTracker.Application.Users.Commands.SetDefaultCurrency;
 using ExpenseTracker.Application.Users.Queries.GetAllUsersQueries;
 using ExpenseTracker.Application.Users.Queries.GetUserByIdQueries;
 using ExpenseTracker.Domain.Users;
+using ExpenseTracker.Web.Contracts.Users;
 using ExpenseTracker.Web.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Shared.Results;
 
 namespace ExpenseTracker.Web.Endpoints;
@@ -16,6 +19,7 @@ public static class UserEndpoints
         var group = endpoints.MapGroup("/users");
         
         group.AddUser();
+        group.SetDefaultCurrency();
         group.DeleteUserById();
         group.GetUserById();
         group.GetAllUsers();
@@ -41,6 +45,28 @@ public static class UserEndpoints
 
                 Guid id = result.Value;
                 return Results.Created($"/users/{id}", new {Id = id});
+            });
+    }
+
+    private static void SetDefaultCurrency(this IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapPut(
+            "/{id:guid}/currency",
+            async (
+                Guid id,
+                [FromBody] SetDefaultCurrencyDto dto,
+                ICommandHandler<SetDefaultCurrencyCommand, Result> handler,
+                CancellationToken ct) =>
+            {
+                SetDefaultCurrencyCommand command = new SetDefaultCurrencyCommand(id, dto.CurrencyId);
+                Result result = await handler.Handle(command, ct);
+
+                if (result.IsFailure)
+                {
+                    return result.ToProblemDetails();
+                }
+                
+                return Results.Ok();
             });
     }
 

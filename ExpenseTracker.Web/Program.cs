@@ -17,6 +17,7 @@ app.ApplyMigrations();
 app.UseExceptionHandler();
 
 app.MapUserEndpoints()
+    .MapCurrencyEndpoints()
     .MapCategoryEndpoints()
     .MapExpenseRecordEndpoints()
     .MapHealthCheckEndpoints();

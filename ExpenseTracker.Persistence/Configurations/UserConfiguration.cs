@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Domain.Users;
+﻿using ExpenseTracker.Domain.Currencies;
+using ExpenseTracker.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +18,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .ValueGeneratedNever()
             .HasColumnName("id");
+        
+        builder.Property(u => u.DefaultCurrencyId)
+            .IsRequired()
+            .ValueGeneratedNever()
+            .HasColumnName("default_currency_id");
 
         builder.OwnsOne(u => u.Name, nameBuilder =>
         {
@@ -25,5 +31,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 .HasMaxLength(400)
                 .HasColumnName("name");
         });
+
+        builder.HasOne<Currency>()
+            .WithMany()
+            .HasForeignKey(u => u.DefaultCurrencyId);
     }
 }

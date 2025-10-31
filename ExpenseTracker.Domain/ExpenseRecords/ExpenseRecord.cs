@@ -10,12 +10,14 @@ public class ExpenseRecord : BaseEntity
         Guid id,
         Guid userId,
         Guid categoryId,
+        Guid currencyId,
         DateTime createdAt,
         ExpenseAmount amount)
         : base(id)
     {
         UserId = userId;
         CategoryId = categoryId;
+        CurrencyId = currencyId;
         CreatedAt = createdAt;
         Amount = amount;
     }
@@ -24,13 +26,15 @@ public class ExpenseRecord : BaseEntity
     
     public Guid UserId { get; }
     public Guid CategoryId { get; }
+    public Guid CurrencyId { get; }
     public DateTime CreatedAt { get; }
-    public ExpenseAmount Amount { get; } = null!;
+    public ExpenseAmount Amount { get; }
 
     public static Result<ExpenseRecord> Create(
         Guid id,
         Guid userId,
         Guid categoryId,
+        Guid currencyId,
         DateTime createdAt,
         decimal amount)
     {
@@ -40,6 +44,6 @@ public class ExpenseRecord : BaseEntity
             return amountResult.Error;
         }
 
-        return new ExpenseRecord(id, userId, categoryId, createdAt, amountResult.Value!);
+        return new ExpenseRecord(id, userId, categoryId,currencyId, createdAt, amountResult.Value!);
     }
 }

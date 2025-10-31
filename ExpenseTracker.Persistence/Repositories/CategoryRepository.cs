@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Application.Categories.Abstractions;
 using ExpenseTracker.Domain.Categories;
+using ExpenseTracker.Domain.Categories.ValueObjects.CategoryNames;
 using ExpenseTracker.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,5 +31,10 @@ public class CategoryRepository(AppDbContext dbContext) : ICategoryRepository
         {
             dbContext.Categories.Remove(category);
         }
+    }
+
+    public async Task<bool> IsUniqueName(CategoryName name, CancellationToken ct)
+    {
+        return !await dbContext.Categories.AnyAsync(c => c.Name == name, ct);
     }
 }

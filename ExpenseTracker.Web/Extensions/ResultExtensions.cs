@@ -22,6 +22,7 @@ public static class ResultExtensions
             errorType switch
             {
                 ErrorType.Validation => StatusCodes.Status400BadRequest,
+                ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
                 ErrorType.NotFound => StatusCodes.Status404NotFound,
                 ErrorType.Conflict => StatusCodes.Status409Conflict,
                 _ => StatusCodes.Status500InternalServerError,
@@ -31,6 +32,7 @@ public static class ResultExtensions
             errorType switch
             {
                 ErrorType.Validation => "Validation",
+                ErrorType.Unauthorized => "Unauthorized",
                 ErrorType.NotFound => "Not Found",
                 ErrorType.Conflict => "Conflict",
                 _ => "Server Failure"
@@ -40,6 +42,7 @@ public static class ResultExtensions
             errorType switch
             {
                 ErrorType.Validation => "https://www.rfc-editor.org/rfc/rfc7231#section-6.5.1",
+                ErrorType.Unauthorized => "https://www.rfc-editor.org/rfc/rfc7235#section-3.1",
                 ErrorType.NotFound => "https://www.rfc-editor.org/rfc/rfc7231#section-6.5.4",
                 ErrorType.Conflict => "https://www.rfc-editor.org/rfc/rfc7231#section-6.5.8",
                 _ => "https://www.rfc-editor.org/rfc/rfc7231#section-6.6.1"

@@ -15,6 +15,7 @@ using ExpenseTracker.Application.ExpenseRecords.Queries.GetExpenseRecordByIdQuer
 using ExpenseTracker.Application.ExpenseRecords.Queries.GetExpenseRecordsByFilterQueries;
 using ExpenseTracker.Application.Users.Commands.CreateUserCommands;
 using ExpenseTracker.Application.Users.Commands.DeleteUserByIdCommands;
+using ExpenseTracker.Application.Users.Commands.Login;
 using ExpenseTracker.Application.Users.Commands.SetDefaultCurrency;
 using ExpenseTracker.Application.Users.Queries.GetAllUsersQueries;
 using ExpenseTracker.Application.Users.Queries.GetUserByIdQueries;
@@ -32,6 +33,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<ICommandHandler<CreateUserCommand, Result<Guid>>, CreateUserCommandHandler>();
+        services.AddScoped<ICommandHandler<LoginCommand, Result<string>>, LoginCommandHandler>();
         services.AddScoped<ICommandHandler<SetDefaultCurrencyCommand, Result>, SetDefaultCurrencyCommandHandler>();
         services.AddScoped<ICommandHandler<DeleteUserByIdCommand, Result>, DeleteUserByIdCommandHandler>();
         services.AddScoped<IQueryHandler<GetUserByIdQuery, Result<User>>, GetUserByIdQueryHandler>();

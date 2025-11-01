@@ -13,6 +13,11 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
         return await dbContext.Users.FindAsync([id], ct);
     }
 
+    public async Task<User?> GetByLogin(UserLogin login, CancellationToken ct)
+    {
+        return await dbContext.Users.FirstOrDefaultAsync(u => u.Login == login, ct);
+    }
+
     public async Task<IEnumerable<User>> GetAll(CancellationToken ct)
     {
         return await dbContext.Users.ToArrayAsync(ct);

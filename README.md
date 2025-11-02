@@ -48,46 +48,51 @@ To check if the service is running correctly, send a simple **HTTP GET** request
 
 ### General
 
-| HTTP Method | URL                      | Description                              |
-|-------------|--------------------------|------------------------------------------|
-| GET         | `/healthcheck`           | Return service status and current UTC time |
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| GET         | `/healthcheck`           | Yes           | Return service status and current UTC time |
+
+### Auth
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| POST        | `/register`              | No            | Register a new user with the specified `login`, `name`, `password` and `defaultCurrencyId` |
+| POST        | `/login`                 | No            | Authenticate a user using the provided `login` and `password`. Return a JWT token if the credentials are valid |
 
 ### User
 
-| HTTP Method | URL                      | Description                              |
-|-------------|--------------------------|------------------------------------------|
-| POST        | `/users`                 | Create a new user with the specified `name` and `defaultCurrencyId` |
-| PUT         | `/users/{id}/currency`   | Set specified default currency for the user |
-| DELETE      | `/users/{id}`            | Delete a user by the unique id           |
-| GET         | `/users/{id}`            | Return a user by the unique id           |
-| GET         | `/users`                 | Return a list of users                   |
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| PUT         | `/users/{id}/currency`   | Yes           | Set specified default currency for the user |
+| DELETE      | `/users/{id}`            | Yes           | Delete a user by the unique id           |
+| GET         | `/users/{id}`            | Yes           | Return a user by the unique id           |
+| GET         | `/users`                 | Yes           | Return a list of users                   |
 
 ### Currency
 
-| HTTP Method | URL                      | Description                              |
-|-------------|--------------------------|------------------------------------------|
-| POST        | `/currencies`            | Create a new currency with the specified `code` and `name` |
-| DELETE      | `/currencies/{id}`       | Delete a currency by the unique id       |
-| GET         | `/currencies/{id}`       | Return a currency by the unique id       |
-| GET         | `/currencies`            | Return a list of currencies              |
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| POST        | `/currencies`            | Yes           | Create a new currency with the specified `code` and `name` |
+| DELETE      | `/currencies/{id}`       | Yes           | Delete a currency by the unique id       |
+| GET         | `/currencies/{id}`       | No            | Return a currency by the unique id       |
+| GET         | `/currencies`            | No            | Return a list of currencies              |
 
 ### Category
 
-| HTTP Method | URL                      | Description                              |
-|-------------|--------------------------|------------------------------------------|
-| POST        | `/categories`            | Create a new category with the specified `name` |
-| DELETE      | `/categories/{id}`       | Delete a category by the unique id       |
-| GET         | `/categories/{id}`       | Return a category by the unique id       |
-| GET         | `/categories`            | Return a list of categories              |
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| POST        | `/categories`            | Yes           | Create a new category with the specified `name` |
+| DELETE      | `/categories/{id}`       | Yes           | Delete a category by the unique id       |
+| GET         | `/categories/{id}`       | Yes           | Return a category by the unique id       |
+| GET         | `/categories`            | Yes           | Return a list of categories              |
 
 ### Record
 
-| HTTP Method | URL                      | Description                              |
-|-------------|--------------------------|------------------------------------------|
-| POST        | `/records`               | Create a new record with the specified `userId`, `categoryId`, `currencyId` and `amount` |
-| DELETE      | `/records/{id}`          | Delete a record by the unique id       |
-| GET         | `/records/{id}`          | Return a record by the unique id       |
-| GET         | `/records?UserId={id}&CategoryId={id}` | Return a list of records filtered by `UserId` and `CategoryId`. At least one parameter must be provided |
+| HTTP Method | URL                      | Auth Required | Description                              |
+|-------------|--------------------------|---------------|------------------------------------------|
+| POST        | `/records`               | Yes           | Create a new record with the specified `userId`, `categoryId`, `currencyId` and `amount` |
+| DELETE      | `/records/{id}`          | Yes           | Delete a record by the unique id       |
+| GET         | `/records/{id}`          | Yes           | Return a record by the unique id       |
+| GET         | `/records?UserId={id}&CategoryId={id}` | Yes           | Return a list of records filtered by `UserId` and `CategoryId`. At least one parameter must be provided |
 
 <span id="individual-task"></span>
 ## Individual Task

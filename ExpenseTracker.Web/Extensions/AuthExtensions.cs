@@ -11,7 +11,8 @@ public static class AuthExtensions
             .AddJwtBearer();
 
         services.AddAuthorization();
-        
+
+        services.ConfigureOptions<AuthorizationOptionsSetup>();
         services.ConfigureOptions<JwtOptionsSetup>();
         services.ConfigureOptions<JwtBearerOptionsSetup>();
     }

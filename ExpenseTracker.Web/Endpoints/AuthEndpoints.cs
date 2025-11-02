@@ -10,8 +10,11 @@ public static class AuthEndpoints
 {
     public static IEndpointRouteBuilder MapAuthEndpoints(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.RegisterUser();
-        endpoints.LoginUser();
+        var group = endpoints.MapGroup("/")
+            .AllowAnonymous();
+        
+        group.RegisterUser();
+        group.LoginUser();
         
         return endpoints;
     }

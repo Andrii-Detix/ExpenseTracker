@@ -81,7 +81,7 @@ public static class CurrencyEndpoints
                 }
                 
                 return Results.Ok(result.Value);
-            });
+            }).AllowAnonymous();
     }
 
     private static void GetAllCurrencies(this IEndpointRouteBuilder endpoints)
@@ -100,6 +100,6 @@ public static class CurrencyEndpoints
                 }
                 
                 return Results.Ok(result.Value);
-            });
+            }).AllowAnonymous();
     }
 }

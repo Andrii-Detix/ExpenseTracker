@@ -14,9 +14,9 @@ builder.Services
 
 var app = builder.Build();
 
-app.ApplyMigrations();
-
 app.UseExceptionHandler();
+
+app.ApplyMigrations();
 
 app.UseAuthentication();
 app.UseAuthorization();

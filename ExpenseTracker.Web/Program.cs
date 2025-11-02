@@ -28,4 +28,6 @@ app.MapUserEndpoints()
     .MapExpenseRecordEndpoints()
     .MapHealthCheckEndpoints();
 
+await app.SeedData();
+
 app.Run();

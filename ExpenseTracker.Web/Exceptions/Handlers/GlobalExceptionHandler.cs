@@ -12,6 +12,11 @@ public class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
+        if (httpContext.Response.HasStarted)
+        {
+            return true;
+        }
+        
         var problem = Result
             .Failure(GlobalErrors.Occured)
             .ToProblemDetails();

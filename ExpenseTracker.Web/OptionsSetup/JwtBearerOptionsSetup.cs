@@ -33,6 +33,7 @@ public class JwtBearerOptionsSetup(IOptions<JwtOptions> jwtOptions)
         {
             OnAuthenticationFailed = async context =>
             {
+                context.NoResult();
                 Error error = context.Exception switch
                 {
                     SecurityTokenExpiredException => AuthErrors.ExpiredToken,
@@ -43,6 +44,7 @@ public class JwtBearerOptionsSetup(IOptions<JwtOptions> jwtOptions)
             },
             OnChallenge = async context =>
             {
+                context.HandleResponse();
                 await SetupResponse(AuthErrors.Unauthorized, context.HttpContext);
             }
         };
@@ -52,6 +54,9 @@ public class JwtBearerOptionsSetup(IOptions<JwtOptions> jwtOptions)
 
     private static async Task SetupResponse(Error error, HttpContext context)
     {
+        if (context.Response.HasStarted)
+            return;
+        
         Result errorResult = Result.Failure(error);
         await errorResult.ToProblemDetails()
             .ExecuteAsync(context);

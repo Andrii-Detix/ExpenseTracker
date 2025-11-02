@@ -7,6 +7,11 @@ public static class AuthExtensions
 {
     public static void AddAuth(this IServiceCollection services)
     {
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
+
+        services.AddAuthorization();
+        
         services.ConfigureOptions<JwtOptions>();
         services.ConfigureOptions<JwtBearerOptions>();
     }

@@ -14,7 +14,9 @@ public static class DependencyInjection
                     $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
             };
         });
-
+        
+        services.AddAuth();
+        
         services.AddExceptionHandler<GlobalExceptionHandler>();
         
         return services;

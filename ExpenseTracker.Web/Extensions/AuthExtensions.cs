@@ -1,4 +1,4 @@
-﻿using ExpenseTracker.Infrastructure.Authentication;
+﻿using ExpenseTracker.Web.OptionsSetup;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ExpenseTracker.Web.Extensions;
@@ -12,7 +12,7 @@ public static class AuthExtensions
 
         services.AddAuthorization();
         
-        services.ConfigureOptions<JwtOptions>();
-        services.ConfigureOptions<JwtBearerOptions>();
+        services.ConfigureOptions<JwtOptionsSetup>();
+        services.ConfigureOptions<JwtBearerOptionsSetup>();
     }
 }

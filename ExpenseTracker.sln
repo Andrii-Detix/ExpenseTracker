@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Persistence", "ExpenseTracker.Persistence\ExpenseTracker.Persistence.csproj", "{EDBDF744-EA97-4A39-8C40-8EE99EDD8C8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure", "ExpenseTracker.Infrastructure\ExpenseTracker.Infrastructure.csproj", "{4B26D97B-8E2B-4E33-BA6C-AF223B342A15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,7 @@ Global
 		{6848CFCB-E0EE-4054-A0E5-5D7AFB83BF80} = {2081695F-2430-4B3E-8C79-1548861B007C}
 		{0A6AB3D6-453F-4386-AE39-F09D1A290188} = {2081695F-2430-4B3E-8C79-1548861B007C}
 		{EDBDF744-EA97-4A39-8C40-8EE99EDD8C8D} = {2081695F-2430-4B3E-8C79-1548861B007C}
+		{4B26D97B-8E2B-4E33-BA6C-AF223B342A15} = {2081695F-2430-4B3E-8C79-1548861B007C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5FAA6AF5-E5EC-4D3C-A34D-674D2D69DE78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -48,5 +51,9 @@ Global
 		{EDBDF744-EA97-4A39-8C40-8EE99EDD8C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBDF744-EA97-4A39-8C40-8EE99EDD8C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBDF744-EA97-4A39-8C40-8EE99EDD8C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B26D97B-8E2B-4E33-BA6C-AF223B342A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B26D97B-8E2B-4E33-BA6C-AF223B342A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B26D97B-8E2B-4E33-BA6C-AF223B342A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B26D97B-8E2B-4E33-BA6C-AF223B342A15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

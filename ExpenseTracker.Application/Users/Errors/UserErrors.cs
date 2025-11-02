@@ -6,4 +6,10 @@ public static class UserErrors
 {
     public static Error NotFound(Guid id) => Error.NotFound(
         "User.NotFound", $"User with id {id} was not found.");
+
+    public static Error AlreadyExistsByLogin(string login) => Error.Conflict(
+        "User.AlreadyExistsByLogin", $"The user with login '{login}' already exists.");
+
+    public static readonly Error InvalidCredentials = Error.Unauthorized(
+        "User.InvalidCredentials", "Invalid login or password.");
 }

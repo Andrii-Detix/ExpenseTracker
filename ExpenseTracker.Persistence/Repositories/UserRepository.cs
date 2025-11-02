@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Application.Users.Abstractions;
 using ExpenseTracker.Domain.Users;
+using ExpenseTracker.Domain.Users.ValueObjects.UserLogins;
 using ExpenseTracker.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,11 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
     public async Task<User?> GetById(Guid id, CancellationToken ct)
     {
         return await dbContext.Users.FindAsync([id], ct);
+    }
+
+    public async Task<User?> GetByLogin(UserLogin login, CancellationToken ct)
+    {
+        return await dbContext.Users.FirstOrDefaultAsync(u => u.Login == login, ct);
     }
 
     public async Task<IEnumerable<User>> GetAll(CancellationToken ct)
@@ -30,6 +36,11 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
         {
             dbContext.Users.Remove(user);
         }
+    }
+
+    public async Task<bool> IsUniqueByLogin(UserLogin login, CancellationToken ct)
+    {
+        return !await dbContext.Users.AnyAsync(u => u.Login == login, ct);
     }
 
     public Task<bool> IsAnyByDefaultCurrency(Guid defaultCurrencyId, CancellationToken ct)

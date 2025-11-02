@@ -4,4 +4,4 @@ using Shared.Results;
 
 namespace ExpenseTracker.Application.Users.Queries.GetUserByIdQueries;
 
-public record GetUserByIdQuery(Guid Id) : IQuery<Result<User>>;
+public record GetUserByIdQuery(Guid Id) : IQuery<Result<GetUserByIdResponse>>;

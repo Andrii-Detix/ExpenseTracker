@@ -1,6 +1,8 @@
 services:
   expense-tracker-api:
     container_name: expense-tracker-api
+    environment:
+      - Jwt__SecretKey=iDxxFbdM2UWD67yyEQl1GXf1fDQnf7tLtTkuupSoiANwMPRcyWfAkusw4UxNlrV/fAS7a1WhurmTCC1jljw5vg==
     build:
       context: .
       dockerfile: ExpenseTracker.Web/Dockerfile

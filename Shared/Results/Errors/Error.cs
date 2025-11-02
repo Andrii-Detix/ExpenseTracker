@@ -43,6 +43,9 @@ public record Error
     public static Error Validation(string code, string message) =>
         new(code, message, ErrorType.Validation);
     
+    public static Error Unauthorized(string code, string message) =>
+        new(code, message, ErrorType.Unauthorized);
+    
     public static Error NotFound(string code, string message) =>
         new(code, message, ErrorType.NotFound);
     

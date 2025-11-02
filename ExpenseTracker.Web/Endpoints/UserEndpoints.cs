@@ -4,7 +4,6 @@ using ExpenseTracker.Application.Users.Commands.DeleteUserByIdCommands;
 using ExpenseTracker.Application.Users.Commands.SetDefaultCurrency;
 using ExpenseTracker.Application.Users.Queries.GetAllUsersQueries;
 using ExpenseTracker.Application.Users.Queries.GetUserByIdQueries;
-using ExpenseTracker.Domain.Users;
 using ExpenseTracker.Web.Contracts.Users;
 using ExpenseTracker.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -96,10 +95,10 @@ public static class UserEndpoints
             "/{id:guid}",
             async (
                 Guid id,
-                IQueryHandler<GetUserByIdQuery, Result<User>> handler,
+                IQueryHandler<GetUserByIdQuery, Result<GetUserByIdResponse>> handler,
                 CancellationToken ct) =>
             {
-                Result<User> result = await handler.Handle(new GetUserByIdQuery(id), ct);
+                Result<GetUserByIdResponse> result = await handler.Handle(new GetUserByIdQuery(id), ct);
 
                 if (result.IsFailure)
                 {
@@ -115,10 +114,10 @@ public static class UserEndpoints
         endpoints.MapGet(
             "/",
             async (
-                IQueryHandler<GetAllUsersQuery, IEnumerable<User>> handler,
+                IQueryHandler<GetAllUsersQuery, IEnumerable<UserResponse>> handler,
                 CancellationToken ct) =>
             {
-                IEnumerable<User> result = await handler.Handle(new GetAllUsersQuery(), ct);
+                IEnumerable<UserResponse> result = await handler.Handle(new GetAllUsersQuery(), ct);
                 
                 return Results.Ok(result);
             });

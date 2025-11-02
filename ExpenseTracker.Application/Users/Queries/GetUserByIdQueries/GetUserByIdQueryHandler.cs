@@ -7,9 +7,9 @@ using Shared.Results;
 namespace ExpenseTracker.Application.Users.Queries.GetUserByIdQueries;
 
 public sealed class GetUserByIdQueryHandler(IUserRepository userRepository)
-    : IQueryHandler<GetUserByIdQuery, Result<User>>
+    : IQueryHandler<GetUserByIdQuery, Result<GetUserByIdResponse>>
 {
-    public async Task<Result<User>> Handle(GetUserByIdQuery query, CancellationToken ct)
+    public async Task<Result<GetUserByIdResponse>> Handle(GetUserByIdQuery query, CancellationToken ct)
     {
         User? user = await userRepository.GetById(query.Id, ct);
         if (user is null)
@@ -17,6 +17,10 @@ public sealed class GetUserByIdQueryHandler(IUserRepository userRepository)
             return UserErrors.NotFound(query.Id);
         }
 
-        return user;
+        return new GetUserByIdResponse(
+            user.Id,
+            user.Login,
+            user.Name,
+            user.DefaultCurrencyId);
     }
 }

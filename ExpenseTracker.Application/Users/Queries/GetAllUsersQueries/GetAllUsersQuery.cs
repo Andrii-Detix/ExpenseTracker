@@ -3,4 +3,4 @@ using ExpenseTracker.Domain.Users;
 
 namespace ExpenseTracker.Application.Users.Queries.GetAllUsersQueries;
 
-public record GetAllUsersQuery() : IQuery<IEnumerable<User>>;
+public record GetAllUsersQuery : IQuery<IEnumerable<UserResponse>>;

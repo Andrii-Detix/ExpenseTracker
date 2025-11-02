@@ -36,8 +36,8 @@ public static class DependencyInjection
         services.AddScoped<ICommandHandler<LoginCommand, Result<string>>, LoginCommandHandler>();
         services.AddScoped<ICommandHandler<SetDefaultCurrencyCommand, Result>, SetDefaultCurrencyCommandHandler>();
         services.AddScoped<ICommandHandler<DeleteUserByIdCommand, Result>, DeleteUserByIdCommandHandler>();
-        services.AddScoped<IQueryHandler<GetUserByIdQuery, Result<User>>, GetUserByIdQueryHandler>();
-        services.AddScoped<IQueryHandler<GetAllUsersQuery, IEnumerable<User>>, GetAllUsersQueryHandler>();
+        services.AddScoped<IQueryHandler<GetUserByIdQuery, Result<GetUserByIdResponse>>, GetUserByIdQueryHandler>();
+        services.AddScoped<IQueryHandler<GetAllUsersQuery, IEnumerable<UserResponse>>, GetAllUsersQueryHandler>();
         
         services.AddScoped<ICurrencyDeletionPolicy, CurrencyDeletionPolicy>();
         services.AddScoped<ICommandHandler<CreateCurrencyCommand, Result<Guid>>, CreateCurrencyCommandHandler>();

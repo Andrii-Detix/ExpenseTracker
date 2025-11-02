@@ -1,5 +1,4 @@
 ﻿using ExpenseTracker.Application.Abstractions.CQRS.Handlers;
-using ExpenseTracker.Application.Users.Commands.CreateUserCommands;
 using ExpenseTracker.Application.Users.Commands.DeleteUserByIdCommands;
 using ExpenseTracker.Application.Users.Commands.SetDefaultCurrency;
 using ExpenseTracker.Application.Users.Queries.GetAllUsersQueries;
@@ -17,7 +16,6 @@ public static class UserEndpoints
     {
         var group = endpoints.MapGroup("/users");
         
-        group.AddUser();
         group.SetDefaultCurrency();
         group.DeleteUserById();
         group.GetUserById();
@@ -25,28 +23,7 @@ public static class UserEndpoints
         
         return endpoints;
     }
-
-    private static void AddUser(this IEndpointRouteBuilder endpoints)
-    {
-        endpoints.MapPost(
-            "/",
-            async (
-                CreateUserCommand command,
-                ICommandHandler<CreateUserCommand, Result<Guid>> handler,
-                CancellationToken ct) =>
-            {
-                Result<Guid> result = await handler.Handle(command, ct);
-
-                if (result.IsFailure)
-                {
-                    return result.ToProblemDetails();
-                }
-
-                Guid id = result.Value;
-                return Results.Created($"/users/{id}", new {Id = id});
-            });
-    }
-
+    
     private static void SetDefaultCurrency(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPut(

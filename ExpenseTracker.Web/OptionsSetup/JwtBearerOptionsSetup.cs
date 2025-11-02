@@ -33,7 +33,13 @@ public class JwtBearerOptionsSetup(IOptions<JwtOptions> jwtOptions)
         {
             OnAuthenticationFailed = async context =>
             {
-                await SetupResponse(AuthErrors.InvalidToken, context.HttpContext);
+                Error error = context.Exception switch
+                {
+                    SecurityTokenExpiredException => AuthErrors.ExpiredToken,
+                    _ => AuthErrors.InvalidToken
+                };
+                
+                await SetupResponse(error, context.HttpContext);
             },
             OnChallenge = async context =>
             {
